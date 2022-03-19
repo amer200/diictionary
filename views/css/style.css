@@ -1,0 +1,40 @@
+.nav-bar {
+    padding-top: 20px;
+}
+
+.nav-btn {
+    max-width: 116px;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+    line-height: 1;
+    margin-left: 10px;
+}
+
+.inner-file-btn {
+    display: inline-block;
+}
+
+.circle-btn:before {
+    content: ' \25CF';
+    font-size: 10px;
+    display: block;
+    position: relative;
+    left: 5px;
+}
+
+.main-nav-btn {
+    position: relative;
+    right: 30%;
+}
+
+.box-btn {
+    margin-right: auto;
+}
+
+.nav-search {
+    width: 140px;
+    border: 2px solid;
+    border-radius: 8px;
+    height: 35px;
+}
+/* modal */
