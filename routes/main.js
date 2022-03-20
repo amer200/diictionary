@@ -4,4 +4,5 @@ const mainConroller = require("../controllers/main.js");
 
 route.get("/", mainConroller.getIndex);
 route.post("/add-file", mainConroller.addFile);
+route.delete("/remove-file/:id", mainConroller.removeFile);
 module.exports = route;

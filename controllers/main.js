@@ -20,3 +20,13 @@ exports.addFile = (req, res, next) => {
       res.send(503).send(err);
     });
 };
+exports.removeFile = (req, res, next) => {
+  const id = req.params.id;
+  File.findByIdAndDelete(id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.send(503).send(err);
+    });
+};
