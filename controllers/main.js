@@ -30,3 +30,18 @@ exports.removeFile = (req, res, next) => {
       res.send(503).send(err);
     });
 };
+exports.addSubFile = (req, res, next) => {
+  const mainId = req.params.id;
+  const file = req.body.file;
+  File.findById(mainId)
+    .then((f) => {
+      f.subFile.push(file);
+      return f.save();
+    })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(503).send(err.message);
+    });
+};

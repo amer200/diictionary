@@ -45,11 +45,12 @@
                     <button class="btn-dark" id="add-file" onclick="displayAddFileForm()"> اضافة ملف</button>
                     <button class="btn-dark" id=" add-box" onclick="displayAddFilebox()"> اضافة صندوق</button>
                     <form class="d-none" id="main-modal-form">
-                        <div class="mb-3">
+                        <div class="mb-3" id="main-modal-editor">
                             <label for="main-categ-name" id="main-modal-form-label" class="form-label"></label>
-                            <div id="editor-add-categ">
+                            <div id="editor">
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="addMainCateg()">اضافة</button>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="addMainCateg()">اضافة</button>
                     </form>
                 </div>
                 <div class="modal-footer">

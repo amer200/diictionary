@@ -42,7 +42,7 @@ var tools = [
     },
   ],
 ];
-var addMainCategQuill = new Quill("#editor-add-categ", {
+var addMainCategQuill = new Quill("#editor", {
   modules: {
     toolbar: tools,
   },

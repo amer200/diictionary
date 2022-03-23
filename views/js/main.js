@@ -22,10 +22,11 @@ const mainCategModelOptions = (id, categ) => {
                   <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" id='modal-body${id}'>
                   <button class="btn-dark" id="${id}" onclick="removeCateg(this, '${categ}')"> حذف</button>
-                  <button class="btn-dark" id=" add-box" onclick="displayAddFilebox()"> اضافة</button>
+                  <button class="btn-dark" id=" add-box" onclick="addSubItemForm('${id}', '${categ}')"> اضافة</button>
               </div>
+              <div id='editor-add-sub-categ'></div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
@@ -87,7 +88,6 @@ const addMainCateg = () => {
     });
 };
 const removeCateg = (e, categ) => {
-  // const categ = e.categ;
   const id = e.id;
   if (confirm("سيتم الحذف نهائيا وكذلك جميع العناصر المندرجة منه")) {
     fetch(`http://localhost:3000/remove-${categ}/${id}`, {
@@ -108,4 +108,43 @@ const removeCateg = (e, categ) => {
         console.log(err);
       });
   }
+};
+const addSubItemForm = (id, categ) => {
+  const editor = document.createElement("div");
+  editor.id = `sub-editor${id}`;
+  const submitBtn = document.createElement("button");
+  submitBtn.classList.add("btn", "btn-dark");
+  submitBtn.textContent = "حفظ";
+  const modalContainer = document.getElementById(`modal-body${id}`);
+  modalContainer.appendChild(editor);
+  modalContainer.appendChild(submitBtn);
+  const subEditor = new Quill(`#sub-editor${id}`, {
+    modules: {
+      toolbar: tools,
+    },
+    theme: "snow",
+  });
+  submitBtn.addEventListener("click", () => {
+    const file = {
+      name: subEditor.root.innerHTML,
+    };
+
+    fetch(`http://localhost:3000/add-sub-${categ}/${id}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ file }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          alert("خطاء الرجاء المحاوة مرة اخرى");
+        } else {
+          alert("تم الاضافة");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };
